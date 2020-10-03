@@ -1,0 +1,25 @@
+version: "3.7"
+# コンテナの集まりの名前を定義
+services:
+    # 1つのコンテナの名前を定義
+    # これ+プロジェクト(ディレクトリ)名がimage名となる
+    make-cpu:
+        build: .
+        # image名をここで編集する(変える)
+        image: linux-gui
+        # container名
+        container_name: "make-cpu"
+        # 実行ユーザーとグループの指定
+        user: "1000:1000"
+        # ポート番号の指定(ホスト:コンテナ)
+        ports:
+          - 3389:3389
+        # コンテナからローカルへバインドマウントする
+        volumes: 
+          - type: bind
+            source: ./workspace
+            target: /home
+        # ユーザー名とパスワードの設定
+        environment: 
+          USER: rind
+          PASSWD: rindrind
